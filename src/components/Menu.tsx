@@ -1,21 +1,42 @@
 import menuData from '../data/menu.json';
 
-type MenuItem = {
-    id: string;
-    name: string;
-    description: string;
-    price: number;
-    image: string;
+// Define types based on the new JSON structure
+type Variant = {
+    tamano: string;
+    precio: number;
+};
+
+type Item = {
+    nombre: string;
+    precio?: number;
+    precios?: {
+        media_jarra: number;
+        jarra: number;
+    };
+    variantes?: Variant[];
 };
 
 type MenuCategory = {
-    category: string;
-    image: string;
-    items: MenuItem[];
+    categoria: string;
+    opciones_precio?: string[];
+    items: Item[];
+};
+
+// Map categories to images (using previous Unsplash URLs as fallbacks)
+const categoryImages: Record<string, string> = {
+    "Pollos a la Brasa": "/pollo a la brasa.png",
+    "Pollos Broaster": "https://cdn.blog.paulinacocina.net/wp-content/uploads/2024/01/pollo-a-la-broaster-Paulina-Cocina-Recetas-1722251878.jpg",
+    "Chaufa": "https://www.cocineroperuano.com/images/arroz-chaufa-1.jpg",
+    "Platos Criollos": "https://i.ytimg.com/vi/sWXRJbGi6yQ/maxresdefault.jpg",
+    "Salchipapas": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJW6q1VA15_BuQ1sFF6_JFzB67ap6ZhKpH1Q&s",
+    "Bebidas Frías": "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?q=80&w=1974&auto=format&fit=crop",
+    "Gaseosas": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?q=80&w=2070&auto=format&fit=crop",
+    "Bebidas Calientes": "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?q=80&w=1974&auto=format&fit=crop"
 };
 
 export default function Menu() {
-    const categories = menuData.map((c: MenuCategory) => c.category);
+    // Access the 'menu' array from the imported JSON object
+    const categories = menuData.menu.map((c: MenuCategory) => c.categoria);
 
     const scrollToCategory = (category: string) => {
         const element = document.getElementById(category);
@@ -44,7 +65,7 @@ export default function Menu() {
                         >
                             Todos
                         </button>
-                        {categories.map((cat) => (
+                        {categories.map((cat: string) => (
                             <button
                                 key={cat}
                                 onClick={() => scrollToCategory(cat)}
@@ -58,33 +79,78 @@ export default function Menu() {
 
                 {/* Menu Sections */}
                 <div className="space-y-20">
-                    {menuData.map((category: MenuCategory) => (
-                        <div key={category.category} id={category.category} className="scroll-mt-40">
-                            <h3 className="text-3xl font-bold text-white mb-8 border-l-4 border-brand-orange pl-4">
-                                {category.category}
+                    {menuData.menu.map((category: MenuCategory) => (
+                        <div key={category.categoria} id={category.categoria} className="scroll-mt-40">
+
+                            <h3 className="text-3xl md:text-4xl font-bold text-white mb-6 border-l-4 border-brand-orange pl-4 shadow-black drop-shadow-lg">
+                                {category.categoria}
                             </h3>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                                {category.items.map((item) => (
+                            {/* Category Image */}
+                            <div className="mb-8 relative rounded-2xl overflow-hidden h-48 md:h-64 shadow-2xl">
+                                <img
+                                    src={categoryImages[category.categoria] || categoryImages["Pollos a la Brasa"]}
+                                    alt={category.categoria}
+                                    className="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity duration-500"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                            </div>
+
+                            {/* Table Header for Price Options if applicable */}
+                            {category.opciones_precio && (
+                                <div className="flex justify-end mb-4 px-6 text-brand-orange font-bold text-sm uppercase tracking-wider">
+                                    {category.opciones_precio.map((opt, i) => (
+                                        <span key={i} className="w-24 text-right">{opt}</span>
+                                    ))}
+                                </div>
+                            )}
+
+                            <div className="grid grid-cols-1 gap-4">
+                                {category.items.map((item, index) => (
                                     <div
-                                        key={item.id}
-                                        className="bg-brand-dark/50 border border-white/5 rounded-2xl overflow-hidden hover:border-brand-orange/30 transition-all duration-300 hover:shadow-xl hover:shadow-brand-orange/10 group"
+                                        key={index}
+                                        className="bg-brand-dark/50 border border-white/5 rounded-xl p-6 hover:border-brand-orange/30 transition-all duration-300 hover:bg-white/5 group"
                                     >
-                                        <div className="relative h-64 overflow-hidden">
-                                            <img
-                                                src={item.image}
-                                                alt={item.name}
-                                                className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
-                                            />
-                                            <div className="absolute top-4 right-4 bg-black/70 backdrop-blur-md px-3 py-1 rounded-lg text-brand-yellow font-bold border border-brand-yellow/20">
-                                                S/ {item.price.toFixed(2)}
+                                        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                                            <div className="flex-1">
+                                                <h4 className="text-xl font-bold text-white group-hover:text-brand-orange transition-colors">
+                                                    {item.nombre}
+                                                </h4>
                                             </div>
-                                        </div>
 
-                                        <div className="p-6">
-                                            <h4 className="text-xl font-bold text-white mb-2 group-hover:text-brand-orange transition-colors">{item.name}</h4>
-                                            <p className="text-gray-300 text-sm mb-4 leading-relaxed">{item.description}</p>
+                                            {/* Price Rendering Logic */}
+                                            <div className="flex flex-col gap-2 min-w-[120px] items-end">
+                                                {/* Case 1: Simple Price */}
+                                                {item.precio !== undefined && (
+                                                    <span className="text-xl font-bold text-brand-yellow">
+                                                        S/ {item.precio.toFixed(2)}
+                                                    </span>
+                                                )}
 
+                                                {/* Case 2: Multi-size Prices (Precios Object) */}
+                                                {item.precios && (
+                                                    <div className="flex gap-4">
+                                                        <span className="w-24 text-right text-lg font-bold text-brand-yellow">
+                                                            S/ {item.precios.media_jarra.toFixed(2)}
+                                                        </span>
+                                                        <span className="w-24 text-right text-lg font-bold text-brand-yellow">
+                                                            S/ {item.precios.jarra.toFixed(2)}
+                                                        </span>
+                                                    </div>
+                                                )}
+
+                                                {/* Case 3: Variants (Variantes Array) */}
+                                                {item.variantes && (
+                                                    <div className="flex flex-col gap-1 w-full md:w-auto">
+                                                        {item.variantes.map((v, i) => (
+                                                            <div key={i} className="flex justify-between items-center gap-4 text-sm md:text-base border-b border-white/5 pb-1 last:border-0 last:pb-0">
+                                                                <span className="text-gray-400">{v.tamano}</span>
+                                                                <span className="font-bold text-brand-yellow">S/ {v.precio.toFixed(2)}</span>
+                                                            </div>
+                                                        ))}
+                                                    </div>
+                                                )}
+                                            </div>
                                         </div>
                                     </div>
                                 ))}

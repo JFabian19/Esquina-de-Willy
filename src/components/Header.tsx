@@ -10,20 +10,13 @@ export default function Header() {
             <div className="container mx-auto px-4 py-3 flex justify-between items-center">
                 {/* Logo */}
                 <div className="flex items-center gap-2">
-                    <span className="text-2xl">🍗</span>
-                    <h1 className="text-xl font-bold text-white tracking-tight leading-tight">
-                        <span className="text-brand-orange block text-sm font-normal uppercase tracking-widest">Pollos y Parrillas</span>
-                        La Estación Willy
-                    </h1>
+                    <img src="/logo.png" alt="Pollos y Parrillas La Estación Willy" className="h-12 w-auto object-contain" />
                 </div>
 
                 {/* Desktop Nav */}
                 <nav className="hidden md:flex gap-8 items-center">
                     <a href="#hero" className="text-gray-300 hover:text-brand-orange transition-colors font-medium">Inicio</a>
                     <a href="#menu" className="text-gray-300 hover:text-brand-orange transition-colors font-medium">Carta</a>
-                    <a href="#contact" className="px-4 py-2 bg-brand-red hover:bg-red-700 text-white rounded-full font-bold transition-transform hover:scale-105 shadow-md shadow-red-900/20">
-                        Reserva
-                    </a>
                 </nav>
 
                 {/* Mobile Menu Button */}

@@ -1,69 +1,235 @@
-[
-  {
-    "category": "Pollos a la Brasa",
-    "image": "https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?q=80&w=2070&auto=format&fit=crop",
-    "items": [
-      {
-        "id": "p1",
-        "name": "Pollo Entero + Papas + Ensalada",
-        "description": "¡El rey de la mesa! Pollo jugoso con piel crocante y doradita, marinado en nuestras especias secretas, acompañado de papas fritas crujientes y ensalada fresca.",
-        "price": 68.00,
-        "image": "https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?q=80&w=2070&auto=format&fit=crop"
-      },
-      {
-        "id": "p2",
-        "name": "1/2 Pollo + Papas + Ensalada",
-        "description": "Perfecto para compartir. La misma calidad y sabor inigualable, en la porción ideal para dos.",
-        "price": 38.00,
-        "image": "https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?q=80&w=2070&auto=format&fit=crop"
-      },
-      {
-        "id": "p3",
-        "name": "1/4 Pollo + Papas + Ensalada",
-        "description": "Tu dosis personal de felicidad. Un cuarto de pollo brasa con ese sabor ahumado que te encanta.",
-        "price": 22.00,
-        "image": "https://images.unsplash.com/photo-1598103356248-36f8d4381b43?q=80&w=2070&auto=format&fit=crop"
-      }
-    ]
-  },
-  {
-    "category": "Parrillas",
-    "image": "https://images.unsplash.com/photo-1544025162-d76690b6d012?q=80&w=1974&auto=format&fit=crop",
-    "items": [
-      {
-        "id": "pa1",
-        "name": "Parrilla Familiar",
-        "description": "¡Un festín de carnes! Bife tierno, chuleta jugosa, anticuchos de corazón y chorizo, todo a la parrilla en su punto exacto.",
-        "price": 85.00,
-        "image": "https://images.unsplash.com/photo-1544025162-d76690b6d012?q=80&w=1974&auto=format&fit=crop"
-      },
-      {
-        "id": "pa2",
-        "name": "Anticuchos de Corazón",
-        "description": "Corazón de res macerado en ají panca y vinagre, asado al carbón para un sabor intenso y ahumado irresistibles.",
-        "price": 24.00,
-        "image": "https://images.unsplash.com/photo-1529690086133-c8d44f26f21e?q=80&w=1974&auto=format&fit=crop"
-      }
-    ]
-  },
-  {
-    "category": "Bebidas",
-    "image": "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?q=80&w=1974&auto=format&fit=crop",
-    "items": [
-      {
-        "id": "b1",
-        "name": "Chicha Morada (Jarra 1L)",
-        "description": "Refrescante y 100% natural, hecha con maíz morado selecto, piña, canela y clavo.",
-        "price": 15.00,
-        "image": "https://images.unsplash.com/photo-1625937329535-42023d8c1998?q=80&w=1934&auto=format&fit=crop"
-      },
-      {
-        "id": "b2",
-        "name": "Inca Kola 1.5L",
-        "description": "El sabor que nos une, la compañera perfecta e infaltable para tu pollo a la brasa.",
-        "price": 12.00,
-        "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?q=80&w=2070&auto=format&fit=crop"
-      }
-    ]
-  }
-]
+{
+  "menu": [
+    {
+      "categoria": "Pollos a la Brasa",
+      "items": [
+        {
+          "nombre": "1/8 de Pollo",
+          "precio": 10.00
+        },
+        {
+          "nombre": "1/4 de Pollo",
+          "precio": 18.00
+        },
+        {
+          "nombre": "1/2 Pollo",
+          "precio": 38.00
+        },
+        {
+          "nombre": "1 Pollo Entero",
+          "precio": 75.00
+        }
+      ]
+    },
+    {
+      "categoria": "Pollos Broaster",
+      "items": [
+        {
+          "nombre": "Broaster Personal",
+          "precio": 10.00
+        },
+        {
+          "nombre": "Broaster Mediano",
+          "precio": 15.00
+        },
+        {
+          "nombre": "Broaster Grande",
+          "precio": 20.00
+        }
+      ]
+    },
+    {
+      "categoria": "Chaufa",
+      "items": [
+        {
+          "nombre": "Chaufa de Pollo",
+          "precio": 11.00
+        },
+        {
+          "nombre": "Chaufa de Carne",
+          "precio": 15.00
+        },
+        {
+          "nombre": "Aeropuerto de Carne",
+          "precio": 17.00
+        },
+        {
+          "nombre": "Aeropuerto de Pollo",
+          "precio": 14.00
+        }
+      ]
+    },
+    {
+      "categoria": "Platos Criollos",
+      "items": [
+        {
+          "nombre": "Lomo Saltado de Carne",
+          "precio": 16.00
+        },
+        {
+          "nombre": "Saltado de Pollo",
+          "precio": 14.00
+        },
+        {
+          "nombre": "Tallarín Saltado de Carne",
+          "precio": 18.00
+        },
+        {
+          "nombre": "Tallarín Saltado de Pollo",
+          "precio": 17.00
+        },
+        {
+          "nombre": "Bistek Montado",
+          "precio": 18.00
+        },
+        {
+          "nombre": "Bistek a lo Pobre",
+          "precio": 20.00
+        },
+        {
+          "nombre": "Milanesa de Pollo",
+          "precio": 15.00
+        },
+        {
+          "nombre": "Apanado de Carne",
+          "precio": 16.00
+        }
+      ]
+    },
+    {
+      "categoria": "Salchipapas",
+      "items": [
+        {
+          "nombre": "Salchipapa Simple",
+          "precio": 8.00
+        },
+        {
+          "nombre": "Salchipapa Montada",
+          "precio": 10.00
+        },
+        {
+          "nombre": "Salchipollo",
+          "precio": 13.00
+        },
+        {
+          "nombre": "Salchipollo Montado",
+          "precio": 15.00
+        },
+        {
+          "nombre": "Salchibrasa",
+          "precio": 15.00
+        },
+        {
+          "nombre": "Salchibroaster",
+          "precio": 15.00
+        }
+      ]
+    },
+    {
+      "categoria": "Bebidas Frías",
+      "opciones_precio": [
+        "Media Jarra",
+        "1 Jarra"
+      ],
+      "items": [
+        {
+          "nombre": "Chicha Morada",
+          "precios": {
+            "media_jarra": 6.00,
+            "jarra": 12.00
+          }
+        },
+        {
+          "nombre": "Limonada",
+          "precios": {
+            "media_jarra": 5.00,
+            "jarra": 10.00
+          }
+        },
+        {
+          "nombre": "Maracuyá",
+          "precios": {
+            "media_jarra": 6.00,
+            "jarra": 12.00
+          }
+        }
+      ]
+    },
+    {
+      "categoria": "Gaseosas",
+      "items": [
+        {
+          "nombre": "Inka Kola",
+          "variantes": [
+            {
+              "tamano": "2 Litros",
+              "precio": 12.00
+            },
+            {
+              "tamano": "1.5 Litros",
+              "precio": 8.00
+            },
+            {
+              "tamano": "1 Litro",
+              "precio": 6.00
+            },
+            {
+              "tamano": "1/2 Litro",
+              "precio": 5.00
+            },
+            {
+              "tamano": "Personal",
+              "precio": 4.00
+            }
+          ]
+        },
+        {
+          "nombre": "Coca Cola",
+          "variantes": [
+            {
+              "tamano": "2 Litros",
+              "precio": 12.00
+            },
+            {
+              "tamano": "1.5 Litros",
+              "precio": 8.00
+            },
+            {
+              "tamano": "1 Litro",
+              "precio": 6.00
+            },
+            {
+              "tamano": "Personal",
+              "precio": 4.00
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "categoria": "Bebidas Calientes",
+      "items": [
+        {
+          "nombre": "Manzanilla",
+          "precio": 1.00
+        },
+        {
+          "nombre": "Muña",
+          "precio": 1.00
+        },
+        {
+          "nombre": "Anís",
+          "precio": 1.00
+        },
+        {
+          "nombre": "Té",
+          "precio": 1.00
+        },
+        {
+          "nombre": "Café",
+          "precio": 1.20
+        }
+      ]
+    }
+  ]
+}
