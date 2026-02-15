@@ -17,6 +17,11 @@ export default function Hero() {
             {/* Content */}
             <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center gap-6 animate-fade-in-up">
                 <div className="w-16 h-1 bg-brand-orange mb-2 animate-bounce-short" />
+
+                <div className="bg-brand-red/90 text-white px-6 py-2 rounded-full font-bold animate-pulse shadow-lg mb-4 border border-brand-yellow/30 text-sm md:text-base">
+                    ¡Todo para llevar a S/ 1.00 extra!
+                </div>
+
                 <h2 className="text-brand-yellow font-medium tracking-wide uppercase text-sm md:text-base mb-1">Pollos y Parrillas</h2>
                 <h1 className="text-5xl md:text-7xl font-extrabold text-white leading-tight drop-shadow-2xl">
                     La Estación <span className="text-transparent bg-clip-text bg-gradient-to-br from-brand-red to-brand-orange">Willy</span>

@@ -5,18 +5,22 @@
       "items": [
         {
           "nombre": "1/8 de Pollo",
+          "descripcion": "Tierna porción de pollo a la brasa, macerado con nuestra receta secreta, acompañado de papas crocantes y ensalada.",
           "precio": 10.00
         },
         {
           "nombre": "1/4 de Pollo",
+          "descripcion": "Cuarto de pollo jugoso y doradito, con ese sabor ahumado irresistible. Incluye papas fritas y ensalada fresca.",
           "precio": 18.00
         },
         {
           "nombre": "1/2 Pollo",
+          "descripcion": "Ideal para compartir. Medio pollo a la brasa en su punto, piel crocante y carne suave. Se sirve con abundantes papas y ensalada.",
           "precio": 38.00
         },
         {
           "nombre": "1 Pollo Entero",
+          "descripcion": "¡El rey de la mesa! Pollo entero braseado lentamente, perfecto para la familia. Viene con porción familiar de papas y ensalada.",
           "precio": 75.00
         }
       ]
@@ -26,14 +30,17 @@
       "items": [
         {
           "nombre": "Broaster Personal",
+          "descripcion": "Pieza de pollo con empanizado especial ultra crujiente y sazón única. Acompañado de papas fritas doradas.",
           "precio": 10.00
         },
         {
           "nombre": "Broaster Mediano",
+          "descripcion": "Dos piezas de nuestro broaster crujiente y jugoso, servido con papas fritas calientes.",
           "precio": 15.00
         },
         {
           "nombre": "Broaster Grande",
+          "descripcion": "Tres piezas de pollo broaster, fritura perfecta y sabor inigualable. Ideal para grandes apetitos.",
           "precio": 20.00
         }
       ]
@@ -43,18 +50,22 @@
       "items": [
         {
           "nombre": "Chaufa de Pollo",
+          "descripcion": "Arroz al wok salteado con trozos de pollo, huevo, cebollita china y el inconfundible sabor oriental-peruano.",
           "precio": 11.00
         },
         {
           "nombre": "Chaufa de Carne",
+          "descripcion": "Delicioso arroz chaufa con tiernos trozos de carne vacuna, salteado a fuego alto para un sabor ahumado espectacular.",
           "precio": 15.00
         },
         {
           "nombre": "Aeropuerto de Carne",
+          "descripcion": "Fusión explosiva de arroz chaufa y tallarín saltado con carne, todo revuelto en el wok para el máximo sabor.",
           "precio": 17.00
         },
         {
           "nombre": "Aeropuerto de Pollo",
+          "descripcion": "Combinación contundente de arroz chaufa, tallarines y pollo, con el toque ahumado del wok.",
           "precio": 14.00
         }
       ]
@@ -64,34 +75,42 @@
       "items": [
         {
           "nombre": "Lomo Saltado de Carne",
+          "descripcion": "Trozos de lomo fino flambeados al wok con cebolla, tomate y ají amarillo. Servido con papas fritas y arroz graneado.",
           "precio": 16.00
         },
         {
           "nombre": "Saltado de Pollo",
+          "descripcion": "Jugosos trozos de pollo salteados con vegetales frescos, acompañado de papas doradas y arroz.",
           "precio": 14.00
         },
         {
           "nombre": "Tallarín Saltado de Carne",
+          "descripcion": "Pasta al dente salteada al wok con carne vacuna, cebolla, tomate y un toque de sillao.",
           "precio": 18.00
         },
         {
           "nombre": "Tallarín Saltado de Pollo",
+          "descripcion": "Pasta salteada con trozos de pollo y vegetales frescos, sazonada al estilo criollo.",
           "precio": 17.00
         },
         {
           "nombre": "Bistek Montado",
+          "descripcion": "Bistek suave y jugoso a la plancha, servido con arroz, papas fritas y coronado con un huevo frito.",
           "precio": 18.00
         },
         {
           "nombre": "Bistek a lo Pobre",
+          "descripcion": "Bistek jugoso acompañado de arroz, papas fritas, huevo frito y plátano frito. ¡Completo y delicioso!",
           "precio": 20.00
         },
         {
           "nombre": "Milanesa de Pollo",
+          "descripcion": "Suprema de pollo empanizada y frita hasta quedar dorada y crocante. Acompañado de arroz y papas.",
           "precio": 15.00
         },
         {
           "nombre": "Apanado de Carne",
+          "descripcion": "Carne de res suave, empanizada y frita a la perfección. Servida con guarnición de arroz y papas.",
           "precio": 16.00
         }
       ]
@@ -101,26 +120,32 @@
       "items": [
         {
           "nombre": "Salchipapa Simple",
+          "descripcion": "Clásica combinación de papas fritas y hot dog en cortes generosos.",
           "precio": 8.00
         },
         {
           "nombre": "Salchipapa Montada",
+          "descripcion": "Nuestra salchipapa clásica con abundantes papas y hot dog, coronada con un huevo frito.",
           "precio": 10.00
         },
         {
           "nombre": "Salchipollo",
+          "descripcion": "La mezcla perfecta: papas fritas, hot dog y trozos de nuestro delicioso pollo a la brasa.",
           "precio": 13.00
         },
         {
           "nombre": "Salchipollo Montado",
+          "descripcion": "Papas fritas, hot dog y pollo a la brasa, todo cubierto con huevo frito.",
           "precio": 15.00
         },
         {
           "nombre": "Salchibrasa",
+          "descripcion": "Generosa porción de papas fritas con hot dog y trozos de pollo a la brasa desmenuzado.",
           "precio": 15.00
         },
         {
           "nombre": "Salchibroaster",
+          "descripcion": "Papas fritas crocantes, hot dog y trozos de nuestro pollo broaster crujiente.",
           "precio": 15.00
         }
       ]

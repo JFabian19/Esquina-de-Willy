@@ -8,6 +8,7 @@ type Variant = {
 
 type Item = {
     nombre: string;
+    descripcion?: string;
     precio?: number;
     precios?: {
         media_jarra: number;
@@ -25,13 +26,13 @@ type MenuCategory = {
 // Map categories to images (using previous Unsplash URLs as fallbacks)
 const categoryImages: Record<string, string> = {
     "Pollos a la Brasa": "/pollo a la brasa.png",
-    "Pollos Broaster": "https://cdn.blog.paulinacocina.net/wp-content/uploads/2024/01/pollo-a-la-broaster-Paulina-Cocina-Recetas-1722251878.jpg",
-    "Chaufa": "https://www.cocineroperuano.com/images/arroz-chaufa-1.jpg",
-    "Platos Criollos": "https://i.ytimg.com/vi/sWXRJbGi6yQ/maxresdefault.jpg",
-    "Salchipapas": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJW6q1VA15_BuQ1sFF6_JFzB67ap6ZhKpH1Q&s",
-    "Bebidas Frías": "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?q=80&w=1974&auto=format&fit=crop",
-    "Gaseosas": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?q=80&w=2070&auto=format&fit=crop",
-    "Bebidas Calientes": "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?q=80&w=1974&auto=format&fit=crop"
+    "Pollos Broaster": "/broaster.png",
+    "Chaufa": "/chaufa.png",
+    "Platos Criollos": "/criollos.png",
+    "Salchipapas": "/salchipapa.png",
+    "Bebidas Frías": "/frias.png",
+    "Gaseosas": "/gaseosa.png",
+    "Bebidas Calientes": "/frias.png"
 };
 
 export default function Menu() {
@@ -87,13 +88,14 @@ export default function Menu() {
                             </h3>
 
                             {/* Category Image */}
-                            <div className="mb-8 relative rounded-2xl overflow-hidden h-48 md:h-64 shadow-2xl">
+                            <div className="mb-8 relative rounded-2xl overflow-hidden aspect-[3/2] shadow-[0_0_20px_rgba(251,146,60,0.3)] border-4 border-brand-orange/50">
                                 <img
                                     src={categoryImages[category.categoria] || categoryImages["Pollos a la Brasa"]}
                                     alt={category.categoria}
-                                    className="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity duration-500"
+                                    className="w-full h-full object-cover"
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                                {/* Vignette & Gradient Overlay */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30 opacity-60"></div>
                             </div>
 
                             {/* Table Header for Price Options if applicable */}
@@ -116,6 +118,11 @@ export default function Menu() {
                                                 <h4 className="text-xl font-bold text-white group-hover:text-brand-orange transition-colors">
                                                     {item.nombre}
                                                 </h4>
+                                                {item.descripcion && (
+                                                    <p className="text-gray-400 text-sm mt-1 max-w-md group-hover:text-gray-300 transition-colors">
+                                                        {item.descripcion}
+                                                    </p>
+                                                )}
                                             </div>
 
                                             {/* Price Rendering Logic */}

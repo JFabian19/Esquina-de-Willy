@@ -9,8 +9,15 @@ export default function Header() {
         <header className="fixed w-full z-50 bg-brand-dark/95 backdrop-blur-sm border-b border-brand-red/20 shadow-lg">
             <div className="container mx-auto px-4 py-3 flex justify-between items-center">
                 {/* Logo */}
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 relative z-10">
                     <img src="/logo.png" alt="Pollos y Parrillas La Estación Willy" className="h-12 w-auto object-contain" />
+                </div>
+
+                {/* Centered Title */}
+                <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full text-center pointer-events-none">
+                    <h1 className="text-white font-bold text-lg md:text-2xl uppercase tracking-wider font-display bg-brand-dark/50 backdrop-blur-sm px-4 py-1 rounded-full border border-white/5 inline-block shadow-lg">
+                        La Estación <span className="text-brand-orange">Willy</span>
+                    </h1>
                 </div>
 
                 {/* Desktop Nav */}
