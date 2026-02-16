@@ -32,7 +32,7 @@ const categoryImages: Record<string, string> = {
     "Salchipapas": "/salchipapa.png",
     "Bebidas Frías": "/frias.png",
     "Gaseosas": "/gaseosa.png",
-    "Bebidas Calientes": "/frias.png"
+    "Bebidas Calientes": "/cafe.png"
 };
 
 export default function Menu() {
