@@ -2,6 +2,7 @@ import Header from './components/Header';
 import Hero from './components/Hero';
 import Menu from './components/Menu';
 import Footer from './components/Footer';
+import Cart from './components/Cart';
 
 function App() {
   return (
@@ -10,9 +11,10 @@ function App() {
       <Hero />
       <Menu />
       <Footer />
+      <Cart />
 
-      {/* Floating Action Buttons (Right Middle) */}
-      <div className="fixed top-1/2 right-4 z-50 transform -translate-y-1/2 flex flex-col gap-4">
+      {/* Floating Action Buttons (Bottom Right) */}
+      <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-4">
 
         {/* Share Button */}
         <button

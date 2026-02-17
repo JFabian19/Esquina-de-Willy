@@ -1,4 +1,5 @@
 import menuData from '../data/menu.json';
+import { useCart } from '../context/CartContext';
 
 // Define types based on the new JSON structure
 type Variant = {
@@ -23,7 +24,7 @@ type MenuCategory = {
     items: Item[];
 };
 
-// Map categories to images (using previous Unsplash URLs as fallbacks)
+// Map categories to images
 const categoryImages: Record<string, string> = {
     "Pollos a la Brasa": "/pollo a la brasa.png",
     "Pollos Broaster": "/broaster.png",
@@ -35,8 +36,27 @@ const categoryImages: Record<string, string> = {
     "Bebidas Calientes": "/cafe.png"
 };
 
+const AddButton = ({ onClick }: { onClick: () => void }) => (
+    <button
+        onClick={onClick}
+        className="bg-brand-orange hover:bg-orange-600 text-white p-2 rounded-lg transition-colors flex items-center gap-1 group/btn shadow-lg shadow-orange-500/20 active:scale-95"
+        title="Agregar al carrito"
+    >
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+        </svg>
+        <span className="font-bold text-sm hidden md:inline">Agregar</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="md:hidden">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+        </svg>
+    </button>
+);
+
 export default function Menu() {
-    // Access the 'menu' array from the imported JSON object
+    const { addToCart } = useCart();
     const categories = menuData.menu.map((c: MenuCategory) => c.categoria);
 
     const scrollToCategory = (category: string) => {
@@ -94,7 +114,6 @@ export default function Menu() {
                                     alt={category.categoria}
                                     className="w-full h-full object-cover"
                                 />
-                                {/* Vignette & Gradient Overlay */}
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30 opacity-60"></div>
                             </div>
 
@@ -102,7 +121,7 @@ export default function Menu() {
                             {category.opciones_precio && (
                                 <div className="flex justify-end mb-4 px-6 text-brand-orange font-bold text-sm uppercase tracking-wider">
                                     {category.opciones_precio.map((opt, i) => (
-                                        <span key={i} className="w-24 text-right">{opt}</span>
+                                        <span key={i} className="w-32 text-center">{opt}</span>
                                     ))}
                                 </div>
                             )}
@@ -126,33 +145,64 @@ export default function Menu() {
                                             </div>
 
                                             {/* Price Rendering Logic */}
-                                            <div className="flex flex-col gap-2 min-w-[120px] items-end">
+                                            <div className="flex flex-col gap-2 min-w-[120px] items-end justify-center">
                                                 {/* Case 1: Simple Price */}
                                                 {item.precio !== undefined && (
-                                                    <span className="text-xl font-bold text-brand-yellow">
-                                                        S/ {item.precio.toFixed(2)}
-                                                    </span>
+                                                    <div className="flex items-center gap-4">
+                                                        <span className="text-xl font-bold text-brand-yellow">
+                                                            S/ {item.precio.toFixed(2)}
+                                                        </span>
+                                                        <AddButton onClick={() => addToCart({
+                                                            id: item.nombre,
+                                                            name: item.nombre,
+                                                            price: item.precio!
+                                                        })} />
+                                                    </div>
                                                 )}
 
                                                 {/* Case 2: Multi-size Prices (Precios Object) */}
                                                 {item.precios && (
                                                     <div className="flex gap-4">
-                                                        <span className="w-24 text-right text-lg font-bold text-brand-yellow">
-                                                            S/ {item.precios.media_jarra.toFixed(2)}
-                                                        </span>
-                                                        <span className="w-24 text-right text-lg font-bold text-brand-yellow">
-                                                            S/ {item.precios.jarra.toFixed(2)}
-                                                        </span>
+                                                        <div className="flex flex-col items-center gap-2 w-32">
+                                                            <span className="text-lg font-bold text-brand-yellow">
+                                                                S/ {item.precios.media_jarra.toFixed(2)}
+                                                            </span>
+                                                            <AddButton onClick={() => addToCart({
+                                                                id: `${item.nombre} - Media Jarra`,
+                                                                name: item.nombre,
+                                                                variant: "Media Jarra",
+                                                                price: item.precios!.media_jarra
+                                                            })} />
+                                                        </div>
+                                                        <div className="flex flex-col items-center gap-2 w-32">
+                                                            <span className="text-lg font-bold text-brand-yellow">
+                                                                S/ {item.precios.jarra.toFixed(2)}
+                                                            </span>
+                                                            <AddButton onClick={() => addToCart({
+                                                                id: `${item.nombre} - Jarra`,
+                                                                name: item.nombre,
+                                                                variant: "Jarra",
+                                                                price: item.precios!.jarra
+                                                            })} />
+                                                        </div>
                                                     </div>
                                                 )}
 
                                                 {/* Case 3: Variants (Variantes Array) */}
                                                 {item.variantes && (
-                                                    <div className="flex flex-col gap-1 w-full md:w-auto">
+                                                    <div className="flex flex-col gap-3 w-full md:w-auto">
                                                         {item.variantes.map((v, i) => (
-                                                            <div key={i} className="flex justify-between items-center gap-4 text-sm md:text-base border-b border-white/5 pb-1 last:border-0 last:pb-0">
+                                                            <div key={i} className="flex justify-between items-center gap-4 text-sm md:text-base border-b border-white/5 pb-2 last:border-0 last:pb-0">
                                                                 <span className="text-gray-400">{v.tamano}</span>
-                                                                <span className="font-bold text-brand-yellow">S/ {v.precio.toFixed(2)}</span>
+                                                                <div className="flex items-center gap-3">
+                                                                    <span className="font-bold text-brand-yellow">S/ {v.precio.toFixed(2)}</span>
+                                                                    <AddButton onClick={() => addToCart({
+                                                                        id: `${item.nombre} - ${v.tamano}`,
+                                                                        name: item.nombre,
+                                                                        variant: v.tamano,
+                                                                        price: v.precio
+                                                                    })} />
+                                                                </div>
                                                             </div>
                                                         ))}
                                                     </div>
