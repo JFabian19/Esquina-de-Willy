@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext, ReactNode } from 'react';
+import { createContext, useState, useContext, type ReactNode } from 'react';
 
 export interface CartItem {
     id: string; // Unique ID (e.g., "Pollos a la Brasa-Entero")
