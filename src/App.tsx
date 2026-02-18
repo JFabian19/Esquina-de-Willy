@@ -3,6 +3,7 @@ import Hero from './components/Hero';
 import Menu from './components/Menu';
 import Footer from './components/Footer';
 import Cart from './components/Cart';
+import PaymentMethods from './components/PaymentMethods';
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <Header />
       <Hero />
       <Menu />
+      <PaymentMethods />
       <Footer />
       <Cart />
 

@@ -1,4 +1,7 @@
 export default function Footer() {
+
+
+
     return (
         <footer className="bg-gradient-to-t from-black to-brand-dark py-12 border-t border-brand-red/10 text-center md:text-left">
             <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 text-gray-400">
