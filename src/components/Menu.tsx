@@ -10,6 +10,7 @@ type Variant = {
 type Item = {
     nombre: string;
     descripcion?: string;
+    imagen?: string;
     precio?: number;
     precios?: {
         media_jarra: number;
@@ -140,10 +141,23 @@ export default function Menu() {
                                         className="bg-brand-dark/50 border border-white/5 rounded-xl p-6 hover:border-brand-orange/30 transition-all duration-300 hover:bg-white/5 group"
                                     >
                                         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                                            {/* Item Image Placeholder - ONLY for non-beverage categories */}
+                                            {/* Item Image or Placeholder - ONLY for non-beverage categories */}
                                             {!(category.categoria.includes("Bebidas") || category.categoria === "Gaseosas") && (
                                                 <div className="w-full md:w-32 h-32 shrink-0 rounded-lg overflow-hidden bg-white/5 border border-white/10 relative group-hover:border-brand-orange/30 transition-colors flex items-center justify-center">
-                                                    <span className="text-xs text-gray-500 font-medium p-2 text-center">aca va imagen</span>
+                                                    {item.imagen ? (
+                                                        <img
+                                                            src={item.imagen}
+                                                            alt={item.nombre}
+                                                            className="w-full h-full object-cover"
+                                                            onError={(e) => {
+                                                                (e.target as HTMLImageElement).style.display = 'none';
+                                                                (e.target as HTMLImageElement).parentElement!.classList.add('flex', 'items-center', 'justify-center');
+                                                                (e.target as HTMLImageElement).parentElement!.innerText = 'aca va imagen';
+                                                            }}
+                                                        />
+                                                    ) : (
+                                                        <span className="text-xs text-gray-500 font-medium p-2 text-center">aca va imagen</span>
+                                                    )}
                                                 </div>
                                             )}
 
