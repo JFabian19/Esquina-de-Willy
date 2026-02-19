@@ -24,6 +24,9 @@ type MenuCategory = {
     items: Item[];
 };
 
+
+
+
 // Map categories to images
 const categoryImages: Record<string, string> = {
     "Pollos a la Brasa": "/pollo a la brasa.png",
@@ -107,15 +110,19 @@ export default function Menu() {
                                 {category.categoria}
                             </h3>
 
-                            {/* Category Image */}
-                            <div className="mb-8 relative rounded-2xl overflow-hidden aspect-[3/2] shadow-[0_0_20px_rgba(251,146,60,0.3)] border-4 border-brand-orange/50">
-                                <img
-                                    src={categoryImages[category.categoria] || categoryImages["Pollos a la Brasa"]}
-                                    alt={category.categoria}
-                                    className="w-full h-full object-cover"
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30 opacity-60"></div>
-                            </div>
+
+
+                            {/* Category Image for Beverages only */}
+                            {(category.categoria.includes("Bebidas") || category.categoria === "Gaseosas") && (
+                                <div className="mb-8 relative rounded-2xl overflow-hidden aspect-[3/2] shadow-[0_0_20px_rgba(251,146,60,0.3)] border-4 border-brand-orange/50">
+                                    <img
+                                        src={categoryImages[category.categoria] || categoryImages["Pollos a la Brasa"]}
+                                        alt={category.categoria}
+                                        className="w-full h-full object-cover"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30 opacity-60"></div>
+                                </div>
+                            )}
 
                             {/* Table Header for Price Options if applicable */}
                             {category.opciones_precio && (
@@ -133,6 +140,13 @@ export default function Menu() {
                                         className="bg-brand-dark/50 border border-white/5 rounded-xl p-6 hover:border-brand-orange/30 transition-all duration-300 hover:bg-white/5 group"
                                     >
                                         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                                            {/* Item Image Placeholder - ONLY for non-beverage categories */}
+                                            {!(category.categoria.includes("Bebidas") || category.categoria === "Gaseosas") && (
+                                                <div className="w-full md:w-32 h-32 shrink-0 rounded-lg overflow-hidden bg-white/5 border border-white/10 relative group-hover:border-brand-orange/30 transition-colors flex items-center justify-center">
+                                                    <span className="text-xs text-gray-500 font-medium p-2 text-center">aca va imagen</span>
+                                                </div>
+                                            )}
+
                                             <div className="flex-1">
                                                 <h4 className="text-xl font-bold text-white group-hover:text-brand-orange transition-colors">
                                                     {item.nombre}

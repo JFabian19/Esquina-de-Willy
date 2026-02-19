@@ -10,8 +10,8 @@ function App() {
     <div className="min-h-screen bg-brand-dark overflow-hidden flex flex-col font-sans">
       <Header />
       <Hero />
-      <Menu />
       <PaymentMethods />
+      <Menu />
       <Footer />
       <Cart />
 
@@ -42,6 +42,7 @@ function App() {
             <line x1="12" y1="2" x2="12" y2="15" />
           </svg>
         </button>
+
 
         {/* WhatsApp Button */}
         <a
