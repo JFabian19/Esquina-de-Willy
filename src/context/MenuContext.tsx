@@ -1,5 +1,5 @@
 
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
 import { fetchMenuData } from '../services/GoogleSheetsService';
 
 // Transformed Data Structure for the App
