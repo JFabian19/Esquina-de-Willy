@@ -1,4 +1,4 @@
-import menuData from '../data/menu.json';
+import { useMenu } from '../context/MenuContext';
 import { useCart } from '../context/CartContext';
 
 // Define types based on the new JSON structure
@@ -28,18 +28,6 @@ type MenuCategory = {
 
 
 
-// Map categories to images
-const categoryImages: Record<string, string> = {
-    "Pollos a la Brasa": "/pollo a la brasa.png",
-    "Pollos Broaster": "/broaster.png",
-    "Chaufa": "/chaufa.png",
-    "Platos Criollos": "/criollos.png",
-    "Salchipapas": "/salchipapa.png",
-    "Bebidas Frías": "/frias.png",
-    "Gaseosas": "/gaseosa.png",
-    "Bebidas Calientes": "/cafe.png"
-};
-
 const AddButton = ({ onClick }: { onClick: () => void }) => (
     <button
         onClick={onClick}
@@ -61,7 +49,12 @@ const AddButton = ({ onClick }: { onClick: () => void }) => (
 
 export default function Menu() {
     const { addToCart } = useCart();
-    const categories = menuData.menu.map((c: MenuCategory) => c.categoria);
+    const { menu, loading, error, categoryImages } = useMenu();
+
+    if (loading) return <div className="text-white text-center py-20">Cargando menú...</div>;
+    if (error) return <div className="text-red-500 text-center py-20">Error al cargar el menú: {error}</div>;
+
+    const categories = menu.map((c: MenuCategory) => c.categoria);
 
     const scrollToCategory = (category: string) => {
         const element = document.getElementById(category);
@@ -104,7 +97,7 @@ export default function Menu() {
 
                 {/* Menu Sections */}
                 <div className="space-y-20">
-                    {menuData.menu.map((category: MenuCategory) => (
+                    {menu.map((category: MenuCategory) => (
                         <div key={category.categoria} id={category.categoria} className="scroll-mt-40">
 
                             <h3 className="text-3xl md:text-4xl font-bold text-white mb-6 border-l-4 border-brand-orange pl-4 shadow-black drop-shadow-lg">
