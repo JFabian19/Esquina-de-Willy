@@ -10,8 +10,8 @@ function App() {
     <div className="min-h-screen bg-brand-dark overflow-hidden flex flex-col font-sans">
       <Header />
       <Hero />
-      <PaymentMethods />
       <Menu />
+      <PaymentMethods />
       <Footer />
       <Cart />
 

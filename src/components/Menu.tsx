@@ -106,8 +106,8 @@ export default function Menu() {
 
 
 
-                            {/* Category Image for Beverages only */}
-                            {(category.categoria.includes("Bebidas") || category.categoria === "Gaseosas") && (
+                            {/* Category Image for Beverages only (excluding Bebidas Calientes) */}
+                            {(category.categoria === "Bebidas Frías" || category.categoria === "Gaseosas") && (
                                 <div className="mb-8 relative rounded-2xl overflow-hidden aspect-[3/2] shadow-[0_0_20px_rgba(251,146,60,0.3)] border-4 border-brand-orange/50">
                                     <img
                                         src={categoryImages[category.categoria] || categoryImages["Pollos a la Brasa"]}
@@ -141,7 +141,7 @@ export default function Menu() {
                                         </div>
 
                                         {/* 2. Image */}
-                                        {!(category.categoria.includes("Bebidas") || category.categoria === "Gaseosas") && (
+                                        {!(category.categoria === "Bebidas Frías" || category.categoria === "Gaseosas") && (
                                             <div className="w-full aspect-[4/3] overflow-hidden bg-white/5 relative">
                                                 {item.imagen ? (
                                                     <img
