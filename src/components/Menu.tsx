@@ -127,108 +127,119 @@ export default function Menu() {
                                 </div>
                             )}
 
-                            <div className="grid grid-cols-1 gap-4">
+                            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
                                 {category.items.map((item, index) => (
                                     <div
                                         key={index}
-                                        className="bg-brand-dark/50 border border-white/5 rounded-xl p-6 hover:border-brand-orange/30 transition-all duration-300 hover:bg-white/5 group"
+                                        className="bg-brand-dark/50 border border-white/5 rounded-2xl overflow-hidden hover:border-brand-orange/30 transition-all duration-300 hover:bg-white/5 group flex flex-col hover:shadow-lg hover:shadow-orange-500/10 hover:-translate-y-1"
                                     >
-                                        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                                            {/* Item Image or Placeholder - ONLY for non-beverage categories */}
-                                            {!(category.categoria.includes("Bebidas") || category.categoria === "Gaseosas") && (
-                                                <div className="w-full md:w-32 h-32 shrink-0 rounded-lg overflow-hidden bg-white/5 border border-white/10 relative group-hover:border-brand-orange/30 transition-colors flex items-center justify-center">
-                                                    {item.imagen ? (
-                                                        <img
-                                                            src={item.imagen}
-                                                            alt={item.nombre}
-                                                            className="w-full h-full object-cover"
-                                                            onError={(e) => {
-                                                                (e.target as HTMLImageElement).style.display = 'none';
-                                                                (e.target as HTMLImageElement).parentElement!.classList.add('flex', 'items-center', 'justify-center');
-                                                                (e.target as HTMLImageElement).parentElement!.innerText = 'aca va imagen';
-                                                            }}
-                                                        />
-                                                    ) : (
+                                        {/* 1. Title */}
+                                        <div className="px-3 pt-4 pb-2 md:px-4">
+                                            <h4 className="text-sm md:text-lg font-bold text-white group-hover:text-brand-orange transition-colors leading-tight line-clamp-2">
+                                                {item.nombre}
+                                            </h4>
+                                        </div>
+
+                                        {/* 2. Image */}
+                                        {!(category.categoria.includes("Bebidas") || category.categoria === "Gaseosas") && (
+                                            <div className="w-full aspect-[4/3] overflow-hidden bg-white/5 relative">
+                                                {item.imagen ? (
+                                                    <img
+                                                        src={item.imagen}
+                                                        alt={item.nombre}
+                                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                                        onError={(e) => {
+                                                            (e.target as HTMLImageElement).style.display = 'none';
+                                                            (e.target as HTMLImageElement).parentElement!.classList.add('flex', 'items-center', 'justify-center');
+                                                            (e.target as HTMLImageElement).parentElement!.innerText = 'aca va imagen';
+                                                        }}
+                                                    />
+                                                ) : (
+                                                    <div className="w-full h-full flex items-center justify-center">
                                                         <span className="text-xs text-gray-500 font-medium p-2 text-center">aca va imagen</span>
-                                                    )}
+                                                    </div>
+                                                )}
+                                            </div>
+                                        )}
+
+                                        {/* 3. Description */}
+                                        {item.descripcion && (
+                                            <div className="px-3 pt-2 md:px-4">
+                                                <p className="text-gray-400 text-xs md:text-sm group-hover:text-gray-300 transition-colors line-clamp-3">
+                                                    {item.descripcion}
+                                                </p>
+                                            </div>
+                                        )}
+
+                                        {/* 4. Price + Add to Cart */}
+                                        <div className="px-3 py-3 md:px-4 md:py-4 mt-auto">
+                                            {/* Case 1: Simple Price */}
+                                            {item.precio !== undefined && (
+                                                <div className="flex items-center justify-between gap-2">
+                                                    <span className="text-lg md:text-xl font-bold text-brand-yellow">
+                                                        S/ {item.precio.toFixed(2)}
+                                                    </span>
+                                                    <AddButton onClick={() => addToCart({
+                                                        id: item.nombre,
+                                                        name: item.nombre,
+                                                        price: item.precio!
+                                                    })} />
                                                 </div>
                                             )}
 
-                                            <div className="flex-1">
-                                                <h4 className="text-xl font-bold text-white group-hover:text-brand-orange transition-colors">
-                                                    {item.nombre}
-                                                </h4>
-                                                {item.descripcion && (
-                                                    <p className="text-gray-400 text-sm mt-1 max-w-md group-hover:text-gray-300 transition-colors">
-                                                        {item.descripcion}
-                                                    </p>
-                                                )}
-                                            </div>
-
-                                            {/* Price Rendering Logic */}
-                                            <div className="flex flex-col gap-2 min-w-[120px] items-end justify-center">
-                                                {/* Case 1: Simple Price */}
-                                                {item.precio !== undefined && (
-                                                    <div className="flex items-center gap-4">
-                                                        <span className="text-xl font-bold text-brand-yellow">
-                                                            S/ {item.precio.toFixed(2)}
-                                                        </span>
-                                                        <AddButton onClick={() => addToCart({
-                                                            id: item.nombre,
-                                                            name: item.nombre,
-                                                            price: item.precio!
-                                                        })} />
-                                                    </div>
-                                                )}
-
-                                                {/* Case 2: Multi-size Prices (Precios Object) */}
-                                                {item.precios && (
-                                                    <div className="flex gap-4">
-                                                        <div className="flex flex-col items-center gap-2 w-32">
-                                                            <span className="text-lg font-bold text-brand-yellow">
+                                            {/* Case 2: Multi-size Prices (Precios Object) */}
+                                            {item.precios && (
+                                                <div className="flex flex-col gap-2">
+                                                    <div className="flex items-center justify-between gap-2">
+                                                        <div className="flex flex-col">
+                                                            <span className="text-[10px] md:text-xs text-gray-400 uppercase">Media Jarra</span>
+                                                            <span className="text-sm md:text-base font-bold text-brand-yellow">
                                                                 S/ {item.precios.media_jarra.toFixed(2)}
                                                             </span>
-                                                            <AddButton onClick={() => addToCart({
-                                                                id: `${item.nombre} - Media Jarra`,
-                                                                name: item.nombre,
-                                                                variant: "Media Jarra",
-                                                                price: item.precios!.media_jarra
-                                                            })} />
                                                         </div>
-                                                        <div className="flex flex-col items-center gap-2 w-32">
-                                                            <span className="text-lg font-bold text-brand-yellow">
+                                                        <AddButton onClick={() => addToCart({
+                                                            id: `${item.nombre} - Media Jarra`,
+                                                            name: item.nombre,
+                                                            variant: "Media Jarra",
+                                                            price: item.precios!.media_jarra
+                                                        })} />
+                                                    </div>
+                                                    <div className="flex items-center justify-between gap-2 border-t border-white/5 pt-2">
+                                                        <div className="flex flex-col">
+                                                            <span className="text-[10px] md:text-xs text-gray-400 uppercase">Jarra</span>
+                                                            <span className="text-sm md:text-base font-bold text-brand-yellow">
                                                                 S/ {item.precios.jarra.toFixed(2)}
                                                             </span>
+                                                        </div>
+                                                        <AddButton onClick={() => addToCart({
+                                                            id: `${item.nombre} - Jarra`,
+                                                            name: item.nombre,
+                                                            variant: "Jarra",
+                                                            price: item.precios!.jarra
+                                                        })} />
+                                                    </div>
+                                                </div>
+                                            )}
+
+                                            {/* Case 3: Variants (Variantes Array) */}
+                                            {item.variantes && (
+                                                <div className="flex flex-col gap-2">
+                                                    {item.variantes.map((v, i) => (
+                                                        <div key={i} className="flex items-center justify-between gap-2 border-b border-white/5 pb-2 last:border-0 last:pb-0">
+                                                            <div className="flex flex-col">
+                                                                <span className="text-[10px] md:text-xs text-gray-400">{v.tamano}</span>
+                                                                <span className="text-sm md:text-base font-bold text-brand-yellow">S/ {v.precio.toFixed(2)}</span>
+                                                            </div>
                                                             <AddButton onClick={() => addToCart({
-                                                                id: `${item.nombre} - Jarra`,
+                                                                id: `${item.nombre} - ${v.tamano}`,
                                                                 name: item.nombre,
-                                                                variant: "Jarra",
-                                                                price: item.precios!.jarra
+                                                                variant: v.tamano,
+                                                                price: v.precio
                                                             })} />
                                                         </div>
-                                                    </div>
-                                                )}
-
-                                                {/* Case 3: Variants (Variantes Array) */}
-                                                {item.variantes && (
-                                                    <div className="flex flex-col gap-3 w-full md:w-auto">
-                                                        {item.variantes.map((v, i) => (
-                                                            <div key={i} className="flex justify-between items-center gap-4 text-sm md:text-base border-b border-white/5 pb-2 last:border-0 last:pb-0">
-                                                                <span className="text-gray-400">{v.tamano}</span>
-                                                                <div className="flex items-center gap-3">
-                                                                    <span className="font-bold text-brand-yellow">S/ {v.precio.toFixed(2)}</span>
-                                                                    <AddButton onClick={() => addToCart({
-                                                                        id: `${item.nombre} - ${v.tamano}`,
-                                                                        name: item.nombre,
-                                                                        variant: v.tamano,
-                                                                        price: v.precio
-                                                                    })} />
-                                                                </div>
-                                                            </div>
-                                                        ))}
-                                                    </div>
-                                                )}
-                                            </div>
+                                                    ))}
+                                                </div>
+                                            )}
                                         </div>
                                     </div>
                                 ))}

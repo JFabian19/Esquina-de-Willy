@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useCart } from '../context/CartContext';
 
 // Simple SVG Icons
@@ -88,6 +89,12 @@ const MinusIcon = ({ size = 24, className = "" }) => (
     </svg>
 );
 
+const CopyIcon = ({ size = 16 }) => (
+    <svg width={size} height={size} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+    </svg>
+);
+
 export default function Cart() {
     const {
         items,
@@ -98,6 +105,14 @@ export default function Cart() {
         clearCart,
         total
     } = useCart();
+
+    const [copiedLabel, setCopiedLabel] = useState<string | null>(null);
+
+    const copyToClipboard = (text: string, label: string) => {
+        navigator.clipboard.writeText(text);
+        setCopiedLabel(label);
+        setTimeout(() => setCopiedLabel(null), 2000);
+    };
 
     // If cart is empty and closed, don't show anything (except maybe always show if user wants, but request implies "When freshly added an order")
     // "cuando recien se anada un pedido" -> when an order is first added.
@@ -121,6 +136,16 @@ export default function Cart() {
 
     return (
         <>
+            {/* Copy Success Toast */}
+            {copiedLabel && (
+                <div className="fixed bottom-10 left-1/2 transform -translate-x-1/2 z-[70] bg-green-500 text-white px-5 py-2.5 rounded-full shadow-lg flex items-center gap-2 animate-fade-in-out">
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span className="font-bold text-sm">{copiedLabel} copiado</span>
+                </div>
+            )}
+
             {/* Floating "Ver Pedido" Button/Bar */}
             {!isCartOpen && items.length > 0 && (
                 <div className="fixed bottom-4 left-0 right-0 px-4 z-50 flex justify-center animate-slide-up">
@@ -225,13 +250,67 @@ export default function Cart() {
 
                         {/* Footer */}
                         {items.length > 0 && (
-                            <div className="p-4 border-t border-white/10 bg-brand-dark/95 backdrop-blur-sm pb-8 md:pb-4">
-                                <div className="flex justify-between items-center mb-4">
+                            <div className="p-4 border-t border-white/10 bg-brand-dark/95 backdrop-blur-sm pb-8 md:pb-4 space-y-4">
+                                <div className="flex justify-between items-center">
                                     <span className="text-gray-400">Total</span>
                                     <span className="text-2xl font-bold text-white">
                                         S/ {total.toFixed(2)}
                                     </span>
                                 </div>
+
+                                {/* Payment Methods Section */}
+                                <div className="bg-white/5 rounded-xl p-3 border border-white/10">
+                                    <h4 className="text-xs uppercase tracking-wider text-gray-400 mb-3 font-bold">Métodos de Pago</h4>
+
+                                    {/* Yape & Plin Row */}
+                                    <div className="grid grid-cols-2 gap-2 mb-2">
+                                        <button
+                                            onClick={() => copyToClipboard('900643526', 'Yape')}
+                                            className="flex items-center gap-2 bg-brand-dark/80 rounded-lg p-2.5 border border-white/5 hover:border-purple-500/40 transition-all group"
+                                        >
+                                            <img src="/yape.png" alt="Yape" className="w-8 h-8 object-contain rounded" />
+                                            <div className="flex flex-col items-start min-w-0">
+                                                <span className="text-white text-xs font-bold">Yape</span>
+                                                <span className="text-[10px] text-gray-400 font-mono group-hover:text-purple-400 transition-colors">900 643 526</span>
+                                            </div>
+                                            <CopyIcon size={12} />
+                                        </button>
+                                        <button
+                                            onClick={() => copyToClipboard('900643526', 'Plin')}
+                                            className="flex items-center gap-2 bg-brand-dark/80 rounded-lg p-2.5 border border-white/5 hover:border-cyan-500/40 transition-all group"
+                                        >
+                                            <img src="/plin.png" alt="Plin" className="w-8 h-8 object-contain rounded" />
+                                            <div className="flex flex-col items-start min-w-0">
+                                                <span className="text-white text-xs font-bold">Plin</span>
+                                                <span className="text-[10px] text-gray-400 font-mono group-hover:text-cyan-400 transition-colors">900 643 526</span>
+                                            </div>
+                                            <CopyIcon size={12} />
+                                        </button>
+                                    </div>
+
+                                    {/* Cards & Transfer Row */}
+                                    <div className="grid grid-cols-2 gap-2">
+                                        <div className="flex items-center gap-2 bg-brand-dark/80 rounded-lg p-2.5 border border-white/5">
+                                            <span className="text-xl">💳</span>
+                                            <div className="flex flex-col">
+                                                <span className="text-white text-xs font-bold">Tarjetas</span>
+                                                <span className="text-[10px] text-gray-400">Visa / Mastercard</span>
+                                            </div>
+                                        </div>
+                                        <button
+                                            onClick={() => copyToClipboard('00228510661710400950', 'CCI')}
+                                            className="flex items-center gap-2 bg-brand-dark/80 rounded-lg p-2.5 border border-white/5 hover:border-brand-orange/40 transition-all group"
+                                        >
+                                            <span className="text-xl">🏦</span>
+                                            <div className="flex flex-col items-start min-w-0">
+                                                <span className="text-white text-xs font-bold">Transfer.</span>
+                                                <span className="text-[10px] text-gray-400 font-mono truncate group-hover:text-brand-orange transition-colors">CCI: Copiar</span>
+                                            </div>
+                                            <CopyIcon size={12} />
+                                        </button>
+                                    </div>
+                                </div>
+
                                 <button
                                     onClick={handleWhatsAppCheckout}
                                     className="w-full bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold py-3 md:py-4 rounded-xl shadow-lg shadow-green-900/20 flex items-center justify-center gap-2 transition-all hover:scale-[1.02] active:scale-[0.98]"
